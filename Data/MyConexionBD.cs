@@ -10,6 +10,7 @@ namespace CristobalCruz.Data
 
         }
         public DbSet<Cliente> Cliente { get; set; }
-    
+        public DbSet<Prestamo> Prestamo { get; set; }
+
     }
 }

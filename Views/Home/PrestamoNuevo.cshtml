@@ -1,0 +1,80 @@
+﻿
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<div class="row">
+
+<div class="col-md-10">
+<h1 class="text-info">Nuevo Prestamo</h1> 
+</div>
+<div class="col-md-2">
+  <a  class="btn btn-info" asp-controller="Home" asp-action="PrestamoListado" ><i class="fa fa-user-circle" ></i></a>
+  <a  class="btn btn-info" asp-controller="Home" asp-action="Index" ><i class="fa fa-home" ></i></a>
+</div>
+</div>
+
+ <form  asp-action="PrestamoNuevoGuardar">   
+<div class="row">
+ 
+<div class="col-md-9">
+<div class="form-group">
+ <strong><label class="col-form-label">Descripcion</label></strong>
+ <input class="form-control descripcionPrestamo" type="text" name="Descripcion" />
+
+ </div> 
+
+ <div class="form-group">
+<strong> <label class="col-form-label">Monto</label></strong>
+<input class="form-control montoPrestamo" type="number" name="Monto"/>
+</div>
+</div>
+
+<div class="col-md-3">
+ <div class="form-group">
+ <strong><label class="col-form-label">Interes</label></strong>
+ <input class="form-control interesPrestamo" type="number" name="Interes"/>
+ </div> 
+
+ <div class="form-group">
+<strong><label class="col-form-label">Cuota</label></strong>
+<input class="form-control cuotaPrestamo" type="number" name="Cuota"/>
+</div>
+
+ <div class="form-group">
+<strong><label class="col-form-label">ClienteId</label></strong>
+<input class="form-control" type="number" name="ClienteId"/>
+</div>
+
+</div>
+
+</div>
+<div>
+
+</div>
+
+<a id="btnGuardarNuevoPrestamo" href="javascript:void(0);" class="btn btn-success">Guardar</a>
+</form>
+@section Scripts{
+
+    <script>
+    var descripcionPrestamo = $(".descripcionPrestamo").val();
+
+   $("#btnGuardarNuevoPrestamo").click(function () {
+         var xhr = $.ajax({
+            url: "PrestamoNuevoGuardar",
+            type: "POST",
+              data: {
+                "Descripcion": descripcionPrestamo            
+            }
+        });
+        xhr.done(function (data) {
+            alert("Listo")
+        });
+        xhr.fail(function () {
+            Alert("Error")
+        });
+  }); 
+    
+</script>  
+
+}

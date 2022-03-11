@@ -1,4 +1,5 @@
-﻿using CristobalCruz.Models;
+﻿using CristobalCruz.Data;
+using CristobalCruz.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,16 +13,93 @@ namespace CristobalCruz.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly MyConexionBD _context;
+        public HomeController(ILogger<HomeController> logger, MyConexionBD context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
             return View();
         }
+        // *************************************************************************************
+        ////                            Detalle DE  Cliente
+        //****************************************************************************************
+        public IActionResult ObtenerDetalleCliente(int Id)
+        {      
+
+            string Direccion = "No tiene descripcion";
+         
+            Cliente cliente = _context.Cliente.Where(a => a.Id == Id).FirstOrDefault();
+
+            if (cliente != null && !string.IsNullOrEmpty(cliente.Direccion))
+            {
+                Direccion = cliente.Direccion;              
+            }
+            return Json(new { success = true, message = Direccion });      
+
+        }
+
+        // *************************************************************************************
+        ////                            LISTADO DE  Cliente
+        //****************************************************************************************
+        public IActionResult ClientesListado()
+        {
+            List<Cliente> clientes = _context.Cliente.ToList();
+
+            return View(clientes);
+        }
+
+        // *************************************************************************************
+        ////                               Crear nuevo Cliente
+        //****************************************************************************************
+        public IActionResult ClienteNuevo()
+        {
+            return View();
+        }
+        public IActionResult ClienteNuevoGuardar(Cliente cliente)
+        {
+
+            if (string.IsNullOrEmpty(cliente.Nombre))
+            {
+                return Json(new { success = false, message = "Favor llenar los datos"  });
+            }
+            else
+            {
+                _context.Cliente.Add(cliente);
+                _context.SaveChanges();
+                return Json(new
+                {
+                    success = true,
+                    message = "Cliente Registrado"
+                });
+            }
+
+        }
+
+
+        // *************************************************************************************
+        ////                               Crear Prestamo
+        //****************************************************************************************
+        public IActionResult PrestamoNuevo()
+        {
+            return View();
+        }
+        public IActionResult PrestamoNuevoGuardar(Prestamo Prestamo)
+        {
+
+            _context.Prestamo.Add(Prestamo);
+            _context.SaveChanges();
+            return Json(new
+            {
+                success = true,
+                message = "Guardado satisfactoriamente Prestamo #" + Prestamo.Id
+            });
+           
+        }
+
 
         public IActionResult Privacy()
         {
