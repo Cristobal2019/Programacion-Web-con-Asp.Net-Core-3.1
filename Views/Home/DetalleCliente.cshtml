@@ -1,0 +1,33 @@
+﻿@model CristobalCruz.Models.Customer
+
+@{
+    ViewData["Title"] = "Detalle Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="float-right">
+            <a asp-action="Index" asp-controller="Home" class="btn btn-success"><i class="fas fa-home"></i>Inicio</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card border">
+            <div class="card-header">
+               <h3><strong>Detalle de cliente</strong></h3>
+            </div>           
+        </div>
+        <div class="card-body">
+           <ul class=list-group>
+               <li class="list-group-item"><strong>Nombre:</strong>@Html.DisplayFor(g => g.Nombre)</li>
+               <li class="list-group-item"><strong>Teléfono:</strong>@Html.DisplayFor(g => g.Telefono)</li>
+               <li class="list-group-item"><strong>Dirección:</strong>@Html.DisplayFor(g => g.Direccion)</li>
+               <li class="list-group-item"><strong>Email:</strong>@Html.DisplayFor(g => g.Email)</li>
+           </ul>
+        </div>
+    </div>
+
+</div>

@@ -33,6 +33,89 @@ namespace CristobalCruz.Controllers
         {
             return View( _context.Customer.ToList());
         }
+        [HttpGet]
+        public IActionResult CrearCliente()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CrearCliente( Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Customer.Add(customer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult EditCliente(int? id)
+        {
+            if (id==null)
+            { return NotFound(); }
+            var cliente = _context.Customer.Find(id);
+           
+            if(cliente == null)
+            {  return NotFound(); }
+            return View(cliente);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCliente(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Update(customer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View(customer);
+        }
+
+        [HttpGet]
+        public IActionResult DetalleCliente(int? id)
+        {
+            if (id == null)
+            { return NotFound(); }
+            var cliente = _context.Customer.Find(id);
+
+            if (cliente == null)
+            { return NotFound(); }
+            return View(cliente);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteCliente(int? id)
+        {
+            if (id == null)
+            { return NotFound(); }
+            var cliente = _context.Customer.Find(id);
+
+            if (cliente == null)
+            { return NotFound(); }
+            return View(cliente);
+        }
+
+        [HttpPost, ActionName("DeleteCliente")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteClientePost(int? id)
+        {
+            var usuario = await _context.Customer.FindAsync(id);
+            if(usuario==null)
+            {
+                return View();
+            }            
+                _context.Customer.Remove(usuario);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+        }
         // *************************************************************************************
         ////                            Detalle DE  Cliente
         //****************************************************************************************

@@ -1,4 +1,5 @@
 using CristobalCruz.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,12 @@ namespace CristobalCruz
             services.AddDbContext<MyConexionBD>(options =>
             options.UseSqlServer(
             Configuration.GetConnectionString("DefaultConnection")));
+
+            //Para forzar el ingreso con credenciales
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            });
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

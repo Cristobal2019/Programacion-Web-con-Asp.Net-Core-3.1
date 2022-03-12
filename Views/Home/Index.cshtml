@@ -10,8 +10,7 @@
 <div class="row">
     <div class="col-12">
         <div class="float-right">
-            <a asp-action="create" asp-controller="Home" class="btn btn-success"><i class="fas fa-plus"></i>Nuevo Cliente</a>
-
+            <a asp-action="CrearCliente" asp-controller="Home" class="btn btn-success"><i class="fas fa-plus"></i>Nuevo Cliente</a>
         </div>
 
     </div>
@@ -46,9 +45,9 @@
                                     <td>@Html.DisplayFor(j => item.Direccion)</td>
                                      <td>@Html.DisplayFor(j => item.Email)</td>
                                      <td>
-                                         <a  class=" btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
-                                         <a  class=" btn btn-info" asp-action="details" asp-route-id="@item.Id">Detalle</a>
-                                         <a  class=" btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                                         <a  class=" btn btn-primary" asp-action="EditCliente" asp-route-id="@item.Id">Editar</a>
+                                         <a  class=" btn btn-info" asp-action="DetalleCliente" asp-route-id="@item.Id">Detalle</a>
+                                         <a  class=" btn btn-danger" asp-action="DeleteCliente" asp-route-id="@item.Id">Eliminar</a>
                                      </td>
                                 </tr>
                             }
@@ -69,3 +68,35 @@
     </div>
 
 </div>
+
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            //Llamar a datatable
+            $('#Tablausuario').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });        
+    </script>
+}
+
