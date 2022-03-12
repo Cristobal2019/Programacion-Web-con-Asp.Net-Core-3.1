@@ -24,9 +24,14 @@ namespace CristobalCruz.Controllers
             _context = context;
         }
 
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
         public IActionResult Index()
         {
-            return View();
+            return View( _context.Customer.ToList());
         }
         // *************************************************************************************
         ////                            Detalle DE  Cliente

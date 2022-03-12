@@ -3,14 +3,16 @@ using CristobalCruz.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CristobalCruz.Migrations
 {
     [DbContext(typeof(MyConexionBD))]
-    partial class MyConexionBDModelSnapshot : ModelSnapshot
+    [Migration("20220312173856_migration-customer")]
+    partial class migrationcustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
