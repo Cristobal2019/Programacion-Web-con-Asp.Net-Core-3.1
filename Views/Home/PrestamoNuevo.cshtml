@@ -1,5 +1,14 @@
 ﻿
+<H1>HOLA</H1>
 
+
+
+
+
+
+
+
+@*
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 <div class="row">
@@ -40,10 +49,7 @@
 <input class="form-control cuotaPrestamo" type="number" name="Cuota"/>
 </div>
 
- <div class="form-group">
-<strong><label class="col-form-label">ClienteId</label></strong>
-<input class="form-control" type="number" name="ClienteId"/>
-</div>
+<input class="form-control" idClientePrestamo type="hidden" name="id" value="@Model.Id"/>
 
 </div>
 
@@ -52,29 +58,60 @@
 
 </div>
 
+
 <a id="btnGuardarNuevoPrestamo" href="javascript:void(0);" class="btn btn-success">Guardar</a>
 </form>
 @section Scripts{
-
-    <script>
-    var descripcionPrestamo = $(".descripcionPrestamo").val();
+<script>  
+  
 
    $("#btnGuardarNuevoPrestamo").click(function () {
+  
+       var Id= $(this).attr("data-id2");
+   var Descripcion = $(".descripcionPrestamo").val();
+    var Monto = $(".montoPrestamo").val();
+    var Interes = $(".interesPrestamo").val();
+    var Cuota = $(".cuotaPrestamo").val();
+    var idcliente= $(".idClientePrestamo").val();
+
          var xhr = $.ajax({
             url: "PrestamoNuevoGuardar",
             type: "POST",
-              data: {
-                "Descripcion": descripcionPrestamo            
+            data: {
+              "Descripcion": Descripcion,
+                "Monto": Monto,
+                "Interes": Interes,
+                "Cuota": Cuota,
+                "ClienteId":Id 
             }
         });
+
         xhr.done(function (data) {
-            alert("Listo")
+         Swal.fire({               
+                    icon: 'success',
+                    title: data.message,
+                    showConfirmButton: false,
+                    timer: 15000
+                });
+
+                setTimeout(function () {
+                      location.href ="../Home/ClientesListado"
+                },5000)
+
         });
-        xhr.fail(function () {
-            Alert("Error")
+
+        xhr.fail(function (data) {
+
+        Swal.fire({
+            icon: 'error',
+           title: data.message          
+        })
+
         });
-  }); 
     
+  });  
+
 </script>  
 
 }
+*@

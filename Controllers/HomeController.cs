@@ -9,7 +9,11 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace CristobalCruz.Controllers
-{
+{   // actualizar mi modelo
+    //add-migration migration-producto -context MyConexionBD
+    //update-database -context MyConexionBD
+    //para los roles y permiso
+    // update-database -context ApplicationDbContext
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -83,9 +87,10 @@ namespace CristobalCruz.Controllers
         // *************************************************************************************
         ////                               Crear Prestamo
         //****************************************************************************************
-        public IActionResult PrestamoNuevo()
+        public IActionResult PrestamoNuevo(int id)
         {
-            return View();
+            Cliente modelp = _context.Cliente.Where(h => h.Id == id).FirstOrDefault();
+            return PartialView("PrestamoNuevo", modelp);
         }
         public IActionResult PrestamoNuevoGuardar(Prestamo Prestamo)
         {
