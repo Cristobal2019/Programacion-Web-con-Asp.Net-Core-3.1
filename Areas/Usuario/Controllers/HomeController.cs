@@ -14,6 +14,8 @@ namespace CristobalCruz.Controllers
     //update-database -context MyConexionBD
     //para los roles y permiso
     // update-database -context ApplicationDbContext
+
+    [Area("Usuario")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
