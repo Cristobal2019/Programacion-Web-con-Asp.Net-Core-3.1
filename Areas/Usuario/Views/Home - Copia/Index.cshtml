@@ -5,7 +5,7 @@
 }
 
 
-<h1 class="text-center">LISTADO DE CLIENTES</h1>
+<h1 class="text-center">CLIENTES</h1>
 
 <div class="row">
     <div class="col-12">
@@ -17,8 +17,10 @@
 </div>
 
 <div class="row">
-    <div class="col-12">       
-    <div class="col-12">       
+    <div class="col-12">
+        <div class="card border">
+            <h3><strong>Lista de clientes</strong></h3>
+        </div>
         <div class="card-body">
             <div class="table-response">
                 @if(Model.Count()>0)
@@ -30,7 +32,7 @@
                                <th>@Html.DisplayNameFor(j =>j.Telefono) </th>
                                <th>@Html.DisplayNameFor(j =>j.Direccion) </th>
                                <th>@Html.DisplayNameFor(j =>j.Email) </th>
-                               <th>Opciones</th>
+                               <th>Acciones </th>
                             </tr>                          
                         </thead>
 
@@ -43,10 +45,9 @@
                                     <td>@Html.DisplayFor(j => item.Direccion)</td>
                                      <td>@Html.DisplayFor(j => item.Email)</td>
                                      <td>
-                                         <a  class=" btn btn-primary" asp-action="EditCliente" asp-route-id="@item.Id">Editar</a>                                          
-                                         <a data-id="@item.Id" class="btn btn-info verPrestamo" href="Javascript:void(0);">Prestamos</a>                                  
-                                         <a class=" btn btn-primary" asp-area="Usuario" asp-controller="Prestamos" asp-action="Create" asp-route-ClienteId="@item.Id">Nuevo Prestamo</a>
-                      
+                                         <a  class=" btn btn-primary" asp-action="EditCliente" asp-route-id="@item.Id">Editar</a>
+                                         <a  class=" btn btn-info" asp-action="DetalleCliente" asp-route-id="@item.Id">Detalle</a>
+                                         <a  class=" btn btn-danger" asp-action="DeleteCliente" asp-route-id="@item.Id">Eliminar</a>
                                      </td>
                                 </tr>
                             }
@@ -68,23 +69,6 @@
 
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">DETALLE DE PRESTAMOS</h5>      
-      </div>
-      <div class="modal-body">
-        <span class="valordescripcion">
-        </span>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>       
-      </div>
-    </div>
-  </div>
-</div>
 
 @section Scripts{ 
     <script>
@@ -112,28 +96,7 @@
                     }
                 }
             });
-        });    
-        
-
-   $(".verPrestamo").click(function(){   
-       var Id= $(this).attr("data-id");
-
-      var ggg = $.ajax({
-            url: "/Usuario/Home/ObtenerPrestamoxCliente",
-            type: "POST",
-            data: {
-              "Id":Id 
-            }
-        });
-
-        ggg.done(function(data){
-         $(".valordescripcion").text(data.message);
-         $("#exampleModal").modal("show");
-
-        });
-        ggg.fail(function(){});
-           toastr.error(data.message);
-         }) 
+        });        
     </script>
 }
 

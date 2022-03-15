@@ -26,16 +26,15 @@ namespace CristobalCruz.Controllers
             _context = context;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
+        [HttpGet]
         public IActionResult Index()
         {
             return View( _context.Customer.ToList());
         }
-        [HttpGet]
+
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //                CREAR CLIENTE
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         public IActionResult CrearCliente()
         {
             return View();
@@ -43,7 +42,7 @@ namespace CristobalCruz.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CrearCliente( Customer customer)
+        public async Task<IActionResult> CrearCliente(Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -54,15 +53,19 @@ namespace CristobalCruz.Controllers
             }
             return View();
         }
+
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //                EDITAR CLIENTE
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         [HttpGet]
         public IActionResult EditCliente(int? id)
         {
-            if (id==null)
+            if (id == null)
             { return NotFound(); }
             var cliente = _context.Customer.Find(id);
-           
-            if(cliente == null)
-            {  return NotFound(); }
+
+            if (cliente == null)
+            { return NotFound(); }
             return View(cliente);
         }
 
@@ -80,131 +83,24 @@ namespace CristobalCruz.Controllers
             return View(customer);
         }
 
-        [HttpGet]
-        public IActionResult DetalleCliente(int? id)
-        {
-            if (id == null)
-            { return NotFound(); }
-            var cliente = _context.Customer.Find(id);
-
-            if (cliente == null)
-            { return NotFound(); }
-            return View(cliente);
-        }
-
-        [HttpGet]
-        public IActionResult DeleteCliente(int? id)
-        {
-            if (id == null)
-            { return NotFound(); }
-            var cliente = _context.Customer.Find(id);
-
-            if (cliente == null)
-            { return NotFound(); }
-            return View(cliente);
-        }
-
-        [HttpPost, ActionName("DeleteCliente")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteClientePost(int? id)
-        {
-            var usuario = await _context.Customer.FindAsync(id);
-            if(usuario==null)
-            {
-                return View();
-            }            
-                _context.Customer.Remove(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-
-        }
         // *************************************************************************************
-        ////                            Detalle DE  Cliente
+        ////                            Detalle DE  PRESTAMO X Clientes
         //****************************************************************************************
-        public IActionResult ObtenerDetalleCliente(int Id)
-        {      
+        public IActionResult ObtenerPrestamoxCliente(int Id)
+        {
 
-            string Direccion = "No tiene descripcion";
-         
-            Cliente cliente = _context.Cliente.Where(a => a.Id == Id).FirstOrDefault();
+            string Descripcion = "No tiene Prestamo";
 
-            if (cliente != null && !string.IsNullOrEmpty(cliente.Direccion))
+            Prestamo MisPrestamo = _context.Prestamo.Where(a => a.ClienteId == Id).FirstOrDefault();
+
+            if (MisPrestamo != null)
             {
-                Direccion = cliente.Direccion;              
+                Descripcion = MisPrestamo.Descripcion;
+                
             }
-            return Json(new { success = true, message = Direccion });      
+            return Json(new { success = true, message = Descripcion  });
 
         }
 
-        // *************************************************************************************
-        ////                            LISTADO DE  Cliente
-        //****************************************************************************************
-        public IActionResult ClientesListado()
-        {
-            List<Cliente> clientes = _context.Cliente.ToList();
-
-            return View(clientes);
-        }
-
-        // *************************************************************************************
-        ////                               Crear nuevo Cliente
-        //****************************************************************************************
-        public IActionResult ClienteNuevo()
-        {
-            return View();
-        }
-        public IActionResult ClienteNuevoGuardar(Cliente cliente)
-        {
-
-            if (string.IsNullOrEmpty(cliente.Nombre))
-            {
-                return Json(new { success = false, message = "Favor llenar los datos"  });
-            }
-            else
-            {
-                _context.Cliente.Add(cliente);
-                _context.SaveChanges();
-                return Json(new
-                {
-                    success = true,
-                    message = "Cliente Registrado"
-                });
-            }
-
-        }
-
-
-        // *************************************************************************************
-        ////                               Crear Prestamo
-        //****************************************************************************************
-        public IActionResult PrestamoNuevo(int id)
-        {
-            Cliente modelp = _context.Cliente.Where(h => h.Id == id).FirstOrDefault();
-            return PartialView("PrestamoNuevo", modelp);
-        }
-        public IActionResult PrestamoNuevoGuardar(Prestamo Prestamo)
-        {
-
-            _context.Prestamo.Add(Prestamo);
-            _context.SaveChanges();
-            return Json(new
-            {
-                success = true,
-                message = "Guardado satisfactoriamente Prestamo #" + Prestamo.Id
-            });
-           
-        }
-
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

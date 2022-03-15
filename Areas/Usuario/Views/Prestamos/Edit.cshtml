@@ -1,0 +1,84 @@
+﻿
+@model CristobalCruz.Models.Prestamo
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<h3 class="text-center"> Editar Prestamos</h3>
+<form method="post" asp-action="Create">
+    <div class="row px-2 mx-2 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+         <input type="hidden" asp-for="Id" />
+        <div class="col-10 offset-1 mt-4">           
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Descripcion"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Descripcion" class="form-control" />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+            </div>
+
+             <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Monto"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Monto" class="form-control" readonly/>
+                    <span asp-validation-for="Monto" class="text-danger"></span>
+                </div>
+            </div>
+
+              <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Interes"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Interes" class="form-control"  readonly/>
+                    <span asp-validation-for="Interes" class="text-danger"></span>
+                </div>
+            </div>
+
+              <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Cuota"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Cuota" class="form-control" readonly />
+                    <span asp-validation-for="Cuota" class="text-danger"></span>
+                </div>
+            </div>
+
+              <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="ClienteId"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="ClienteId" class="form-control" readonly/>
+                    <span asp-validation-for="ClienteId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                 <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model.Id">Actualizar</button>
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success form-control">Volver a lista</a>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

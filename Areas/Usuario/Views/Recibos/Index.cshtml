@@ -1,4 +1,4 @@
-﻿@model List<CristobalCruz.Models.Prestamo>
+﻿@model List<CristobalCruz.Models.Recibo>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h2 class="text-primary" style="text-align:center">LISTADO DE PRESTAMOS</h2>
+            <h2 class="text-primary" style="text-align:center">LISTADO DE RECIBOS</h2>
         </div>      
     </div>
 
@@ -15,31 +15,26 @@
     <table id="tblPrestamos" class="table table-striped table-bordered" style="width:100%;">
        <thead>
            <tr>
-               <th>No de Prestamo</th>
+               <th>No Recibos</th>
                <th>Descripcion</th>
                <th>Monto</th>
-               <th>Tasa de Interes</th>
-               <th>Cuota</th>
-                <th>Cliente</th>
-                 <th>Opciones</th>
+               <th>Id Prestamo</th>
+               <th>Id Cliente</th>          
+               <th>Opciones</th>
            </tr>
        </thead> 
         <tbody>
             @{
-                foreach(var item2 in Model)
+                foreach(var cliente in Model)
                 {
                     <tr>
-                <td>@item2.Id</td>
-                 <td>@item2.Descripcion</td>
-                 <td>@item2.Monto</td>
-                 <td>@item2.Interes</td>
-                 <td>@item2.Cuota</td>
-                 <td>@item2.ClienteId</td>
-                    <td>                  
-                    <a class="btn btn-success" href="@Url.Action("Create","Recibos", new{PrestamoId=@item2.Id, ClienteId=@item2.ClienteId})" title="ver">Pagar</a>
-                    <a class="btn btn-primary" href="@Url.Action("Edit",new{id = item2.Id})">Editar</a> 
-                      <a data-id="@item2.Id" class="btn btn-info verCliente" href="Javascript:void(0);">Cliente</a>  
-                     <a data-id="@item2.ClienteId" class="btn btn-info verRecibos" href="Javascript:void(0);">Factura</a>
+                <td>@cliente.Id</td>
+                 <td>@cliente.Descripcion</td>
+                 <td>@cliente.Monto</td>
+                 <td>@cliente.PrestamoId</td>
+                 <td>@cliente.ClienteId</td>               
+                    <td> 
+                      <a data-id="@cliente.Id" class="btn btn-info verCliente" href="Javascript:void(0);">Cliente</a>                                
                      </td>
                 </tr>   
                 }
@@ -93,23 +88,6 @@
                 }
             });
         });
-  //------------------------------------------------------------------      
-        $(".verRecibos").click(function(){   
-       var Id= $(this).attr("data-id");
-      var ggg = $.ajax({
-            url: "/Usuario/Prestamos/ObtenerReciboxPrestamos",
-            type: "POST",
-            data: {
-              "Id":Id 
-            }
-        });
-        ggg.done(function(data){
-         $(".valordescripcion1").text(data.message);
-         $("#exampleModal2").modal("show");
-        });
-        ggg.fail(function(){});
-           toastr.error(data.message);
-         }) 
 
 //------------------------------------------------------------------
      $(".verCliente").click(function(){   
