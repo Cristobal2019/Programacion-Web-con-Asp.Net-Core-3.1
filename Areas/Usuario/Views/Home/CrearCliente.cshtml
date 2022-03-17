@@ -4,50 +4,83 @@
     ViewData["Title"] = "Crear Cliente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row">
-    <div class="col-12">
-        <div class="float-right">
-            <a asp-action="Index" asp-controller="Home" class="btn btn-success"><i class="fas fa-home"></i>Inicio</a>
-        </div>
 
-    </div>
-</div>
-<h1 class="text-center">CREAR NUEVO CLIENTE</h1>
+<h1 class="text-center">NUEVO DE CLIENTE</h1>
+
 <hr />
 <div class="row">
-    <div class="col-12">
-        <div class="card border">
-            <h3><strong>Crear cliente</strong></h3>
-        </div>
+    <div class="col-12">       
         <div class="card-body">
-             <form asp-action="CrearCliente">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <form asp-action="CrearCliente">          
+              <partial name="_VistaGuardarVolver"/>               
+               <br /> <br />  
+
+       <div class="row"> 
+             <div class="col-sm-8"> 
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
+                <input asp-for="Nombre" class="form-control nombreCliente" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Direccion" class="control-label"></label>
+                <input asp-for="Direccion" class="form-control direccionCliente" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+             </div>
+             <div class="col-sm-4"> 
+            <div class="form-group">
                 <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
+                <input asp-for="Telefono" class="form-control celularCliente" type="number"/>
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control emailCliente" type="email" />
                 <span asp-validation-for="Email" class="text-danger"></span>
+            </div>           
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-success"><i class="fas fa-user"></i>Crear</button>
-            </div>
+      </div>
+      <a id="ttt" href="javascript:void(0);" class="btn btn-success">Guardar</a>
+
         </form>
 
         </div>
     </div>
 
 </div>
+
+@section Scripts{
+
+<script>  
+  
+
+   $("#ttt").click(function () {
+
+   var Nombre = $(".nombreCliente").val();
+
+    
+         var xhr = $.ajax({
+            url: "CrearCliente",
+            type: "POST",
+            data: {
+               "Nombre": Nombre                 
+            }
+        });
+
+        xhr.done(function (data) {      
+              toastr.success(data.message);
+        });
+
+        xhr.fail(function (data) {
+          toastr.success(data.message);
+        });
+    
+  });  
+
+</script>  
+
+
+
+}
+

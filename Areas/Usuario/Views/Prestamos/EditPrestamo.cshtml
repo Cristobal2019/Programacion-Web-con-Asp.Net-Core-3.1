@@ -1,0 +1,57 @@
+﻿
+@model CristobalCruz.Models.Prestamo
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">MANTENIMIENTO DE PRESTAMOS</h1>
+
+<div class="row">
+    <div class="col-12">     
+        <div class="card-body">
+            <form asp-action="EditPrestamo">          
+              <partial name="_VistaGuardarVolver"/>               
+               <br /> <br />            
+           <input type="hidden" value="id">
+            <input type="hidden" value="ClienteId">
+            <div class="row"> 
+
+            <div class="col-sm-4">   
+            <div class="form-group">
+                <label asp-for="Monto" class="control-label"></label>
+                <input asp-for="Monto" class="form-control" readonly/>
+                <span asp-validation-for="Monto" class="text-danger"></span>
+            </div>  
+            </div>
+             <div class="col-sm-4">  
+                 <div class="form-group">
+                <label asp-for="Interes" class="control-label"></label>
+                <input asp-for="Interes" class="form-control" readonly/>
+                <span asp-validation-for="Interes" class="text-danger"></span>
+                 </div> 
+            </div>
+             <div class="col-sm-4">   
+                <div class="form-group">
+                <label asp-for="Cuota" class="control-label"></label>
+                <input asp-for="Cuota" class="form-control" readonly/>
+                <span asp-validation-for="Cuota" class="text-danger"></span>
+               </div>
+            </div>
+            
+            <div class="col-sm-12"> 
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div> 
+              </div>           
+         </div>
+           
+        </form>
+
+        </div>
+    </div>
+
+</div>
+

@@ -28,7 +28,7 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         //           CREAR PRESTAMOS
         //------------------------------------------------
         [HttpGet]
-        public IActionResult Create(int PrestamoId, int ClienteId)
+        public IActionResult CreateRecibo(int PrestamoId, int ClienteId)
         {
             return View();
         }

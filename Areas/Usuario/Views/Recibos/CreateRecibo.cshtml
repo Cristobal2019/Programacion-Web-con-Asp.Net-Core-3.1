@@ -4,8 +4,43 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h1 class="text-center">NUEVO RECIBO</h1>
 
-<br />
+<hr />
+<div class="row">
+    <div class="col-12">       
+        <div class="card-body">            
+  <form  asp-action="CreateRecibo" asp-controller="Recibos">
+    <partial name="_VistaGuardarVolver"/>               
+               <br /> <br /> 
+
+       <div class="row"> 
+          <input type="hidden" asp-for="ClienteId" />
+            <input type="hidden" asp-for="PrestamoId" />
+          <div class="col-sm-8"> 
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control"/>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+           </div>
+            <div class="col-sm-4">
+            <div class="form-group">
+                <label asp-for="Monto" class="control-label"></label>
+                <input asp-for="Monto" class="form-control" />
+                <span asp-validation-for="Monto" class="text-danger"></span>
+            </div> 
+            </div>
+
+      </div>
+        </form>
+
+        </div>
+    </div>
+
+</div>
+
+@*<br />
 <br />
 <h3 class="text-center"> CREAR FACTURA</h3>
 <form method="post" asp-action="CreateRecibo">
@@ -45,3 +80,4 @@
     </div>
 </form>
 
+*@

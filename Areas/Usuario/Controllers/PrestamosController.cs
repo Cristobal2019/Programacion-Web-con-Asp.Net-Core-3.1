@@ -28,14 +28,14 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         //           CREAR PRESTAMOS
         //------------------------------------------------
         [HttpGet]
-        public IActionResult Create(int ClienteId)
+        public IActionResult CreatePrestamo(int ClienteId)
         {
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateGuardar(Prestamo prestamo)
+        public IActionResult CreatePrestamo(Prestamo prestamo)
         {
             if (ModelState.IsValid)
             {
@@ -50,7 +50,7 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         //           Editar PRESTAMOS
         //------------------------------------------------
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult EditPrestamo(int id)
         {
             if (id == 0)
             {  
@@ -67,7 +67,7 @@ namespace CristobalCruz.Areas.Usuario.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Prestamo prestamo)
+        public IActionResult EditPrestamo(Prestamo prestamo)
         {
             if (ModelState.IsValid)
             {

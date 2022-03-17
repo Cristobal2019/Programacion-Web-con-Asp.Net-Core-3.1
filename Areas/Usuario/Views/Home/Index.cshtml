@@ -10,14 +10,13 @@
 <div class="row">
     <div class="col-12">
         <div class="float-right">
-            <a asp-action="CrearCliente" asp-controller="Home" class="btn btn-success"><i class="fas fa-plus"></i>Nuevo Cliente</a>
+            <a asp-action="CrearCliente" asp-controller="Home" class="btn btn-success"><i class="fas fa-plus"></i>&nbsp;Nuevo Cliente</a>
         </div>
 
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12">       
+<div class="row">         
     <div class="col-12">       
         <div class="card-body">
             <div class="table-response">
@@ -45,7 +44,7 @@
                                      <td>
                                          <a  class=" btn btn-primary" asp-action="EditCliente" asp-route-id="@item.Id">Editar</a>                                          
                                          <a data-id="@item.Id" class="btn btn-info verPrestamo" href="Javascript:void(0);">Prestamos</a>                                  
-                                         <a class=" btn btn-primary" asp-area="Usuario" asp-controller="Prestamos" asp-action="Create" asp-route-ClienteId="@item.Id">Nuevo Prestamo</a>
+                                         <a class=" btn btn-primary" asp-area="Usuario" asp-controller="Prestamos" asp-action="CreatePrestamo" asp-route-ClienteId="@item.Id">Nuevo Prestamo</a>
                       
                                      </td>
                                 </tr>
@@ -65,8 +64,8 @@
 
         </div>
     </div>
-
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
