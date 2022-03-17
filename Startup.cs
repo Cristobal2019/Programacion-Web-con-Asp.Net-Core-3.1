@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification;
 using CristobalCruz.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -42,6 +43,16 @@ namespace CristobalCruz
             {
                 options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
             });
+
+            //servicio de notification
+
+            services.AddNotyf(Config =>
+            {
+                Config.DurationInSeconds = 10;
+                Config.IsDismissable = true;
+                Config.Position = NotyfPosition.TopRight;                
+            });
+
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

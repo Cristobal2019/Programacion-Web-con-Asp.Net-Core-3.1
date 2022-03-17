@@ -1,4 +1,5 @@
-﻿using CristobalCruz.Data;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using CristobalCruz.Data;
 using CristobalCruz.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -10,9 +11,11 @@ namespace CristobalCruz.Areas.Usuario.Controllers
     {
 
         private readonly MyConexionBD _context;
-        public PrestamosController( MyConexionBD context)
+        private readonly INotyfService _notify;
+        public PrestamosController( MyConexionBD context, INotyfService notyf)
         {           
             _context = context;
+            _notify = notyf;
         }
 
         //------------------------------------------------
@@ -41,8 +44,10 @@ namespace CristobalCruz.Areas.Usuario.Controllers
             {
                 _context.Prestamo.Add(prestamo);
                 _context.SaveChanges();
+                _notify.Success("Prestamo Nuevo <br/>#" + prestamo.Id);
                 return RedirectToAction(nameof(Index));
             }
+            _notify.Error("Error en Crear Prestamo");
             return View(prestamo);
         }
 
@@ -53,15 +58,16 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         public IActionResult EditPrestamo(int id)
         {
             if (id == 0)
-            {  
+            {        
                 return NotFound();
             }
             var prestamo = _context.Prestamo.Find(id);
 
             if (prestamo == null)
-            {
+            {            
                 return NotFound();
             }
+          
             return View(prestamo);          
         }
 
@@ -73,8 +79,11 @@ namespace CristobalCruz.Areas.Usuario.Controllers
             {
                 _context.Prestamo.Update(prestamo);
                 _context.SaveChanges();
+                _notify.Success("Editado Correctamente <br/>Prestamo #" + prestamo.Id);
+              
                 return RedirectToAction(nameof(Index));
             }
+            _notify.Error("Error en Editar Prestamo");
             return View(prestamo);
         }
 

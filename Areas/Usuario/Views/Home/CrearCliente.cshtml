@@ -40,47 +40,10 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>           
             </div>
-      </div>
-      <a id="ttt" href="javascript:void(0);" class="btn btn-success">Guardar</a>
-
+      </div> 
         </form>
-
         </div>
     </div>
 
 </div>
-
-@section Scripts{
-
-<script>  
-  
-
-   $("#ttt").click(function () {
-
-   var Nombre = $(".nombreCliente").val();
-
-    
-         var xhr = $.ajax({
-            url: "CrearCliente",
-            type: "POST",
-            data: {
-               "Nombre": Nombre                 
-            }
-        });
-
-        xhr.done(function (data) {      
-              toastr.success(data.message);
-        });
-
-        xhr.fail(function (data) {
-          toastr.success(data.message);
-        });
-    
-  });  
-
-</script>  
-
-
-
-}
 

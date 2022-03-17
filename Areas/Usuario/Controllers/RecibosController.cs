@@ -1,4 +1,5 @@
-﻿using CristobalCruz.Data;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using CristobalCruz.Data;
 using CristobalCruz.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -10,9 +11,11 @@ namespace CristobalCruz.Areas.Usuario.Controllers
     {
 
         private readonly MyConexionBD _context;
-        public RecibosController(MyConexionBD context)
+        private readonly INotyfService _notify;
+        public RecibosController(MyConexionBD context, INotyfService notyf)
         {
             _context = context;
+            _notify = notyf;
         }
 
         //------------------------------------------------
@@ -41,8 +44,10 @@ namespace CristobalCruz.Areas.Usuario.Controllers
             {
                 _context.Recibo.Add(recibo);
                 _context.SaveChanges();
+                _notify.Success("Recibo Nuevo <br/>#" + recibo.Id);
                 return RedirectToAction(nameof(Index));
             }
+            _notify.Error("Error en Crear Recibo");
             return View(recibo);
         }
 

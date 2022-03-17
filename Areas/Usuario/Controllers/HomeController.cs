@@ -1,4 +1,5 @@
-﻿using CristobalCruz.Data;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using CristobalCruz.Data;
 using CristobalCruz.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,15 +21,17 @@ namespace CristobalCruz.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly MyConexionBD _context;
-        public HomeController(ILogger<HomeController> logger, MyConexionBD context)
+        private readonly INotyfService _notify;
+        public HomeController(ILogger<HomeController> logger, MyConexionBD context, INotyfService notyf)
         {
             _logger = logger;
             _context = context;
+            _notify=notyf;
         }
 
         [HttpGet]
         public IActionResult Index()
-        {
+        {         
             return View( _context.Customer.ToList());
         }
 
@@ -48,10 +51,14 @@ namespace CristobalCruz.Controllers
             {
                 _context.Customer.Add(customer);
                 await _context.SaveChangesAsync();
+                _notify.Success("Cliente Registrado <br/>" + customer.Nombre,10);
                 return RedirectToAction(nameof(Index));
+               
 
             }
-            return View();
+            _notify.Error("Error en Crear cliente");
+            return View(); 
+           
         }
 
        
@@ -78,9 +85,11 @@ namespace CristobalCruz.Controllers
             {
                 _context.Update(customer);
                 await _context.SaveChangesAsync();
+                _notify.Success("Cliente Editado <br/>" + customer.Nombre);
                 return RedirectToAction(nameof(Index));
 
             }
+            _notify.Error("Error en Editar cliente");
             return View(customer);
         }
 
