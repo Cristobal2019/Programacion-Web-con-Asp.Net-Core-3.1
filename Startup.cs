@@ -39,10 +39,10 @@ namespace CristobalCruz
             Configuration.GetConnectionString("DefaultConnection")));
 
             ////Para forzar el ingreso con credenciales
-            //services.AddAuthorization(options =>
-            //{
-            //    options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-            //});
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            });
 
             //servicio de notification
 
