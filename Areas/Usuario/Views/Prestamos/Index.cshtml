@@ -39,7 +39,7 @@
                <th>Monto</th>
                <th>Interes</th>
                <th>Cuota</th>
-                <th>Cliente</th>
+                <th>Id Cliente</th>
                  <th>Opciones</th>
            </tr>
        </thead> 
@@ -76,15 +76,33 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">DETALLE DE CLIENTE</h5>      
       </div>
       <div class="modal-body">
-        <span class="valordescripcion1">
-        </span>
+            <div class="container">
+             <div class="row">
+               <div class="col-12">
+                    <label><strong>Nombre completo</strong></label><br />   
+                  <span class="valorNombre"> </span>
+              </div>
+              <div class="col-12">
+                    <label><strong>Dirección</strong></label><br />    
+                   <span class="valorDireccion"> </span>
+              </div>
+              <div class="col-6">
+                     <label><strong>Teléfono</strong></label><br />      
+                   <span class="valorTelefono"> </span>
+              </div>
+               <div class="col-6">
+                     <label><strong>Correo Electronico</strong></label><br />      
+                   <span class="valorEmail"> </span>
+              </div>
+            </div>
+          </div> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>       
@@ -149,8 +167,11 @@
             }
         });
         ggg.done(function(data){
-         $(".valordescripcion1").text(data.message);
-         $("#exampleModal2").modal("show");
+        $(".valorNombre").text(data.messageNombre);
+        $(".valorDireccion").text(data.messageDireccion);
+        $(".valorTelefono").text(data.messageTelefono);
+        $(".valorEmail").text(data.messageEmail);
+         $("#exampleModalCliente").modal("show");
         });
         ggg.fail(function(){});
            toastr.error(data.message);

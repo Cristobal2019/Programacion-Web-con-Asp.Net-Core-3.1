@@ -112,16 +112,28 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         public IActionResult ObtenerCliente(int ClienteId)
         {
 
-            string Descripcion = "No hay cliente registrado";
-
+          
             Customer cliente = _context.Customer.Where(a => a.Id == ClienteId).FirstOrDefault();
 
             if (cliente != null)
-            {
-                Descripcion = cliente.Nombre;
-
+            {               
+                return Json(new { success = true,
+                    messageNombre = cliente.Nombre,
+                    messageDireccion = cliente.Direccion,
+                    messageTelefono = cliente.Telefono,
+                    messageEmail = cliente.Email
+                });
             }
-            return Json(new { success = true, message = Descripcion });
+            else
+            {
+                return Json(new { success = true,
+                    messageNombre = "No hay cliente registrado",
+                    messageDireccion = "",
+                    messageTelefono =0,
+                    messageEmail = ""                
+                });
+            }
+           
 
         }
 
