@@ -91,19 +91,27 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         ////                            Detalle DE  recibos  X Prestamos
         //****************************************************************************************
         public IActionResult ObtenerReciboxPrestamos(int Id)
-        {
-
-            string Descripcion = "No tiene Recibos";
+        {        
 
             Recibo MisRecibos = _context.Recibo.Where(a => a.PrestamoId == Id).FirstOrDefault();
-
             if (MisRecibos != null)
             {
-                Descripcion = MisRecibos.Descripcion;
-
+                return Json(new { success = true,
+                    messageDescripcion = MisRecibos.Descripcion ,
+                    messageMonto = MisRecibos.Monto,
+                    messageCliente = MisRecibos.ClienteId               
+                });
             }
-            return Json(new { success = true, message = Descripcion });
-
+            else
+            {
+                return Json(new
+                {
+                    success = false,
+                    messageDescripcion = "No tiene Recibos",
+                    messageMonto = 0,
+                    messageCliente = 0
+                });
+            }            
         }
 
         // *************************************************************************************
@@ -126,7 +134,7 @@ namespace CristobalCruz.Areas.Usuario.Controllers
             }
             else
             {
-                return Json(new { success = true,
+                return Json(new { success = false,
                     messageNombre = "No hay cliente registrado",
                     messageDireccion = "",
                     messageTelefono =0,

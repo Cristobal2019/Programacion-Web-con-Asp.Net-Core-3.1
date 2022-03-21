@@ -110,7 +110,38 @@
     </div>
   </div>
 </div>
-
+<div class="modal fade" id="exampleModalRecibos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">DETALLE DE RECIBO</h5>      
+      </div>
+      <div class="modal-body">
+            <div class="container">
+             <div class="row">
+               <div class="col-12">
+                    <label><strong>Descripción</strong></label><br />   
+                  <span class="valordescr"> </span>
+              </div>
+              <div class="col-6">
+                    <label><strong>Monto</strong></label><br />    
+                   <span class="valorMonto"> </span>
+              </div>
+              
+              <div class="col-6">
+                     <label><strong>Id Cliente</strong></label><br />      
+                   <span class="valorcliente"> </span>
+              </div>
+             
+            </div>
+          </div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
 @section Scripts{ 
     <script>
         $(document).ready(function () {
@@ -149,8 +180,10 @@
             }
         });
         ggg.done(function(data){
-         $(".valordescripcion1").text(data.message);
-         $("#exampleModal2").modal("show");
+         $(".valordescr").text(data.messageDescripcion);
+         $(".valorMonto").text(data.messageMonto);
+         $(".valorcliente").text(data.messageCliente);
+         $("#exampleModalRecibos").modal("show");
         });
         ggg.fail(function(){});
            toastr.error(data.message);
