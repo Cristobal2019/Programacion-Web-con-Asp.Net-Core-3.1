@@ -85,63 +85,27 @@ namespace CristobalCruz.Areas.Usuario.Controllers
             }
             _notify.Error("Error en Editar Prestamo");
             return View(prestamo);
-        }
+        }       
 
         // *************************************************************************************
-        ////                            Detalle DE  recibos  X Prestamos
+        ////                            Detalle DE  PRESTAMO X Clientes
         //****************************************************************************************
-        public IActionResult ObtenerReciboxPrestamos(int Id)
-        {        
-
-            Recibo MisRecibos = _context.Recibo.Where(a => a.PrestamoId == Id).FirstOrDefault();
-            if (MisRecibos != null)
-            {
-                return Json(new { success = true,
-                    messageDescripcion = MisRecibos.Descripcion ,
-                    messageMonto = MisRecibos.Monto,
-                    messageCliente = MisRecibos.ClienteId               
-                });
-            }
-            else
-            {
-                return Json(new
-                {
-                    success = false,
-                    messageDescripcion = "No tiene Recibos",
-                    messageMonto = 0,
-                    messageCliente = 0
-                });
-            }            
-        }
-
-        // *************************************************************************************
-        ////                         OBTENER EL CLIENTE
-        //****************************************************************************************
-        public IActionResult ObtenerCliente(int ClienteId)
+        public IActionResult ObtenerPrestamoxCliente(int Id)
         {
 
-          
-            Customer cliente = _context.Customer.Where(a => a.Id == ClienteId).FirstOrDefault();
+            string Descripcion = "No tiene Prestamo";
 
-            if (cliente != null)
-            {               
-                return Json(new { success = true,
-                    messageNombre = cliente.Nombre,
-                    messageDireccion = cliente.Direccion,
-                    messageTelefono = cliente.Telefono,
-                    messageEmail = cliente.Email
-                });
+            Prestamo MisPrestamo = _context.Prestamo.Where(a => a.ClienteId == Id).FirstOrDefault();
+
+            if (MisPrestamo != null)
+            {
+                Descripcion = MisPrestamo.Descripcion;
+                return Json(new { success = true, message = Descripcion, messageMonto = MisPrestamo.Monto, messageInteres = MisPrestamo.Interes });
             }
             else
             {
-                return Json(new { success = false,
-                    messageNombre = "No hay cliente registrado",
-                    messageDireccion = "",
-                    messageTelefono =0,
-                    messageEmail = ""                
-                });
+                return Json(new { success = true, message = Descripcion, messageMonto = 0, messageInteres = 0 });
             }
-           
 
         }
 

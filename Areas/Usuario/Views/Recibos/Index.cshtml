@@ -54,7 +54,7 @@
                  <td>@cliente.PrestamoId</td>
                  <td>@cliente.ClienteId</td>               
                     <td> 
-                      <a data-id="@cliente.Id" class="btn btn-info verCliente" href="Javascript:void(0);">Cliente</a>                                
+                      <a data-id="@cliente.ClienteId" class="btn btn-info verCliente" href="Javascript:void(0);">Cliente</a>                                
                      </td>
                 </tr>   
                 }
@@ -74,15 +74,33 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">DETALLE DE RECIBOS</h5>      
+        <h5 class="modal-title" id="exampleModalLabel">DETALLE DE CLIENTE</h5>      
       </div>
       <div class="modal-body">
-        <span class="valordescripcion1">
-        </span>
+            <div class="container">
+             <div class="row">
+               <div class="col-12">
+                    <label><strong>Nombre completo</strong></label><br />   
+                  <span class="valorNombre"> </span>
+              </div>
+              <div class="col-12">
+                    <label><strong>Dirección</strong></label><br />    
+                   <span class="valorDireccion"> </span>
+              </div>
+              <div class="col-6">
+                     <label><strong>Teléfono</strong></label><br />      
+                   <span class="valorTelefono"> </span>
+              </div>
+               <div class="col-6">
+                     <label><strong>Correo Electronico</strong></label><br />      
+                   <span class="valorEmail"> </span>
+              </div>
+            </div>
+          </div> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>       
@@ -92,50 +110,7 @@
 </div>
 
 @section Scripts{ 
-    <script>
-        $(document).ready(function () {
-            //Llamar a datatable
-            $('#tblPrestamos').DataTable({
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin resultados encontrados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
-            });
-        });
-
-//------------------------------------------------------------------
-     $(".verCliente").click(function(){   
-       var Id= $(this).attr("data-id");
-      var ggg = $.ajax({
-            url: "/Usuario/Prestamos/ObtenerCliente",
-            type: "POST",
-            data: {
-              "Id":Id 
-            }
-        });
-        ggg.done(function(data){
-         $(".valordescripcion1").text(data.message);
-         $("#exampleModal2").modal("show");
-        });
-        ggg.fail(function(){});
-           toastr.error(data.message);
-         }) 
-
-    </script>
+   
+      <script src="~/js/misJsProyecto.js" type="text/javascript"></script>
+   
 }

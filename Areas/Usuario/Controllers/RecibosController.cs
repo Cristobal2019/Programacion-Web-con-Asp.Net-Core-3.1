@@ -49,46 +49,33 @@ namespace CristobalCruz.Areas.Usuario.Controllers
             }
             _notify.Error("Error en Crear Recibo");
             return View(recibo);
+        }               
+
+     
+        // *************************************************************************************
+        ////                            Detalle DE  recibos  X Prestamos
+        //****************************************************************************************
+        public IActionResult ObtenerReciboxPrestamos(int Id)
+        {
+
+            Recibo MisRecibos = _context.Recibo.Where(a => a.PrestamoId == Id).FirstOrDefault();
+            if (MisRecibos != null)
+            {
+                return Json(new
+                {
+                    success = true,  messageDescripcion = MisRecibos.Descripcion,
+                    messageMonto = MisRecibos.Monto,  messageCliente = MisRecibos.ClienteId
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    success = false,  messageDescripcion = "No tiene Recibos",
+                    messageMonto = 0,   messageCliente = 0
+                });
+            }
         }
 
-
-            // *************************************************************************************
-            ////                            Detalle DE  recibos  X Prestamos
-            //****************************************************************************************
-            public IActionResult ObtenerReciboxPrestamos(int Id)
-            {
-
-                string Descripcion = "No tiene Recibos";
-
-                Recibo MisRecibos = _context.Recibo.Where(a => a.PrestamoId == Id).FirstOrDefault();
-
-                if (MisRecibos != null)
-                {
-                    Descripcion = MisRecibos.Descripcion;
-
-                }
-                return Json(new { success = true, message = Descripcion });
-
-            }
-
-            // *************************************************************************************
-            ////                         OBTENER EL CLIENTE
-            //****************************************************************************************
-            public IActionResult ObtenerCliente(int Id)
-            {
-
-                string Descripcion = "No hay cliente registrado";
-
-                Customer cliente = _context.Customer.Where(a => a.Id == Id).FirstOrDefault();
-
-                if (cliente != null)
-                {
-                    Descripcion = cliente.Nombre;
-
-                }
-                return Json(new { success = true, message = Descripcion });
-
-            }
-        
- }   }
+    }   }
 

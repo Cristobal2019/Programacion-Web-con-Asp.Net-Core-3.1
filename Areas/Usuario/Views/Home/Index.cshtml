@@ -34,7 +34,7 @@
 <div class="row">
     <div class="col-12">
         <div class="float-right">
-            <a asp-action="CrearCliente" asp-controller="Home" class="btn btn-success"><i class="fas fa-plus"></i>&nbsp;Nuevo Cliente</a>
+            <a asp-action="CrearCliente" asp-controller="Customer" asp-area="Usuario" class="btn btn-success"><i class="fas fa-plus"></i>&nbsp;Nuevo Cliente</a>
         </div>
 
     </div>
@@ -66,7 +66,7 @@
                                     <td>@Html.DisplayFor(j => item.Direccion)</td>
                                      <td>@Html.DisplayFor(j => item.Email)</td>
                                      <td>
-                                         <a  class=" btn btn-primary" asp-action="EditCliente" asp-route-id="@item.Id">Editar</a>                                          
+                                         <a  class=" btn btn-primary" asp-action="EditCliente" asp-controller="Customer" asp-area="Usuario" asp-route-id="@item.Id">Editar</a>                                          
                                          <a data-id="@item.Id" class="btn btn-info verPrestamo" href="Javascript:void(0);">Prestamos</a>                                  
                                          <a class=" btn btn-primary" asp-area="Usuario" asp-controller="Prestamos" asp-action="CreatePrestamo" asp-route-ClienteId="@item.Id">Nuevo Prestamo</a>
                       
@@ -136,7 +136,9 @@
   </div>
 </div>
 
-@section Scripts{ 
+@section Scripts{    
+      <script src="~/js/misJsProyecto.js" type="text/javascript"></script>   
+
     <script>
         $(document).ready(function () {
             //Llamar a datatable
@@ -165,27 +167,7 @@
         });    
         
 
-   $(".verPrestamo").click(function(){   
-       var Id= $(this).attr("data-id");
 
-      var ggg = $.ajax({
-            url: "/Usuario/Home/ObtenerPrestamoxCliente",
-            type: "POST",
-            data: {
-              "Id":Id 
-            }
-        });
-
-        ggg.done(function(data){
-         $(".valordescripcion").text(data.message);
-         $(".valorMonto").text(data.messageMonto);
-         $(".valorInteres").text(data.messageInteres);          
-         $("#exampleModal").modal("show");
-
-        });
-        ggg.fail(function(){});
-           toastr.error(data.message);
-         }) 
     </script>
 }
 
