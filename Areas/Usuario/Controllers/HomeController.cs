@@ -15,7 +15,7 @@ namespace CristobalCruz.Controllers
     //update-database -context MyConexionBD
     //para los roles y permiso
     // update-database -context ApplicationDbContext
-
+    //Cristobalcruzzarate1@
     [Area("Usuario")]
     public class HomeController : Controller
     {
@@ -98,18 +98,22 @@ namespace CristobalCruz.Controllers
         //****************************************************************************************
         public IActionResult ObtenerPrestamoxCliente(int Id)
         {
-
-            string Descripcion = "No tiene Prestamo";
+         
+            string Descripcion = "No tiene Prestamo";         
 
             Prestamo MisPrestamo = _context.Prestamo.Where(a => a.ClienteId == Id).FirstOrDefault();
 
             if (MisPrestamo != null)
             {
-                Descripcion = MisPrestamo.Descripcion;
-                
-            }
-            return Json(new { success = true, message = Descripcion  });
+                Descripcion = MisPrestamo.Descripcion;             
+                return Json(new { success = true, message = Descripcion, messageMonto = MisPrestamo.Monto, messageInteres = MisPrestamo.Interes });
 
+            }
+            else
+            {
+               return Json(new { success = true, message = Descripcion, messageMonto=0 , messageInteres =0});
+            }        
+       
         }
 
     }

@@ -3,16 +3,35 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<br /> 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="text-primary" style="text-align:center">LISTADO DE PRESTAMOS</h2>
-        </div>      
-    </div>
 
-    <br />    <br />
-    <table id="tblPrestamos" class="table table-striped table-bordered" style="width:100%;">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">LISTADO DE PRESTAMOS</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Prestamos</a></li>
+              <li class="breadcrumb-item active"> Listado de Prestamos</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+     <div class="container-fluid">
+@*------------------------------------------------------------------------
+                  TODO MI CONTENIDO DE MI PAGINA
+-----------------------------------------------------------------------*@
+
+           <table id="tblPrestamos" class="table table-striped table-bordered" style="width:100%;">
        <thead>
            <tr>
                <th>No</th>
@@ -37,23 +56,31 @@
                  <td>@item2.ClienteId</td>
                     <td>                  
                     <a class="btn btn-success" href="@Url.Action("CreateRecibo","Recibos", new{PrestamoId=@item2.Id, ClienteId=@item2.ClienteId})" title="ver">Pagar</a>
+                    
                     <a class="btn btn-primary" href="@Url.Action("EditPrestamo",new{id = item2.Id})">Editar</a> 
-                      <a data-id="@item2.Id" class="btn btn-info verCliente" href="Javascript:void(0);">Cliente</a>  
-                     <a data-id="@item2.ClienteId" class="btn btn-info verRecibos" href="Javascript:void(0);">Factura</a>
+                      <a data-id="@item2.ClienteId" class="btn btn-info verCliente" href="Javascript:void(0);">Cliente</a>  
+                     <a data-id="@item2.Id" class="btn btn-info verRecibos" href="Javascript:void(0);">Factura</a>
                      </td>
                 </tr>   
                 }
             }
         </tbody>
     </table>
-</div>
+
+    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">DETALLE DE RECIBOS</h5>      
+        <h5 class="modal-title" id="exampleModalLabel">DETALLE DE CLIENTE</h5>      
       </div>
       <div class="modal-body">
         <span class="valordescripcion1">
@@ -113,12 +140,12 @@
 
 //------------------------------------------------------------------
      $(".verCliente").click(function(){   
-       var Id= $(this).attr("data-id");
+       var ClienteId= $(this).attr("data-id");
       var ggg = $.ajax({
             url: "/Usuario/Prestamos/ObtenerCliente",
             type: "POST",
             data: {
-              "Id":Id 
+              "ClienteId":ClienteId 
             }
         });
         ggg.done(function(data){

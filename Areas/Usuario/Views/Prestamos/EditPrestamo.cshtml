@@ -5,33 +5,62 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-center">MANTENIMIENTO DE PRESTAMOS</h1>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">MANTENIMIENTO DE PRESTAMOS</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Prestamos</a></li>
+              <li class="breadcrumb-item active">Mantenimiento </li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
-<div class="row">
-    <div class="col-12">     
-        <div class="card-body">
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+
+@*------------------------------------------------------------------------
+                  TODO MI CONTENIDO DE MI PAGINA
+-----------------------------------------------------------------------*@
+ <div class="card-body">
             <form asp-action="EditPrestamo">          
               <partial name="_VistaGuardarVolver"/>               
                <br /> <br />            
-           <input type="hidden" value="id">
-            <input type="hidden" value="ClienteId">
+           <input type="hidden" value="id">         
             <div class="row"> 
 
-            <div class="col-sm-4">   
+            <div class="col-sm-3">   
+            <div class="form-group">
+                <label asp-for="ClienteId" class="control-label"></label>
+                <input asp-for="ClienteId" class="form-control" readonly/>
+                <span asp-validation-for="ClienteId" class="text-danger"></span>
+            </div>  
+            </div>
+            <div class="col-sm-3">   
             <div class="form-group">
                 <label asp-for="Monto" class="control-label"></label>
                 <input asp-for="Monto" class="form-control" readonly/>
                 <span asp-validation-for="Monto" class="text-danger"></span>
             </div>  
             </div>
-             <div class="col-sm-4">  
+             <div class="col-sm-3">  
                  <div class="form-group">
                 <label asp-for="Interes" class="control-label"></label>
                 <input asp-for="Interes" class="form-control" readonly/>
                 <span asp-validation-for="Interes" class="text-danger"></span>
                  </div> 
             </div>
-             <div class="col-sm-4">   
+             <div class="col-sm-3">   
                 <div class="form-group">
                 <label asp-for="Cuota" class="control-label"></label>
                 <input asp-for="Cuota" class="form-control" readonly/>
@@ -51,7 +80,16 @@
         </form>
 
         </div>
-    </div>
 
-</div>
+
+
+
+
+
+   </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
 

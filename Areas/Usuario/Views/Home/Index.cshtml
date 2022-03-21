@@ -5,8 +5,32 @@
 }
 
 
-<h1 class="text-center">LISTADO DE CLIENTES</h1>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">LISTADO DE CLIENTES</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Mis Clientes</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+@*------------------------------------------------------------------------
+                  TODO MI CONTENIDO DE MI PAGINA
+-----------------------------------------------------------------------*@
 <div class="row">
     <div class="col-12">
         <div class="float-right">
@@ -65,6 +89,17 @@
         </div>
     </div>
 </div>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+
+
 
 
 <!-- Modal -->
@@ -72,11 +107,27 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">DETALLE DE PRESTAMOS</h5>      
+        <h5 class="modal-title" id="exampleModalLabel" >DETALLE DE PRESTAMOS</h5>      
       </div>
       <div class="modal-body">
-        <span class="valordescripcion">
-        </span>
+      
+           <div class="container">
+             <div class="row">
+               <div class="col-6">
+                    <label><strong>Descripcion del Prestamo</strong></label><br />   
+                  <span class="valordescripcion"> </span>
+              </div>
+              <div class="col-3">
+                    <label><strong>Interes</strong></label><br />    
+                   <span class="valorInteres"> </span>
+              </div>
+              <div class="col-3">
+                     <label><strong>Monto</strong></label><br />      
+                   <span class="valorMonto"> </span>
+              </div>
+            </div>
+          </div>   
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>       
@@ -127,6 +178,8 @@
 
         ggg.done(function(data){
          $(".valordescripcion").text(data.message);
+         $(".valorMonto").text(data.messageMonto);
+         $(".valorInteres").text(data.messageInteres);          
          $("#exampleModal").modal("show");
 
         });

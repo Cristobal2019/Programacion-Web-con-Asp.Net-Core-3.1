@@ -38,11 +38,11 @@ namespace CristobalCruz
             options.UseSqlServer(
             Configuration.GetConnectionString("DefaultConnection")));
 
-            //Para forzar el ingreso con credenciales
-            services.AddAuthorization(options =>
-            {
-                options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-            });
+            ////Para forzar el ingreso con credenciales
+            //services.AddAuthorization(options =>
+            //{
+            //    options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            //});
 
             //servicio de notification
 

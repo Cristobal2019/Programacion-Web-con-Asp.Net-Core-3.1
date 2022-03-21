@@ -4,15 +4,37 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1 class="text-center">NUEVO RECIBO</h1>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">NUEVO RECIBOS</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Recibos</a></li>
+              <li class="breadcrumb-item active">Nuevo</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
-<hr />
-<div class="row">
-    <div class="col-12">       
-        <div class="card-body">            
+    <!-- Main content -->
+<div class="content">
+<div class="container-fluid">
+
+@*------------------------------------------------------------------------
+                  TODO MI CONTENIDO DE MI PAGINA
+-----------------------------------------------------------------------*@
+  <div class="card-body">            
   <form  asp-action="CreateRecibo" asp-controller="Recibos">
     <partial name="_VistaGuardarVolver"/>               
-               <br /> <br /> 
+    <br /> <br /> 
 
        <div class="row"> 
           <input type="hidden" asp-for="ClienteId" />
@@ -33,51 +55,16 @@
             </div>
 
       </div>
-        </form>
+   </form>
 
-        </div>
-    </div>
+   </div>
+
 
 </div>
 
-@*<br />
-<br />
-<h3 class="text-center"> CREAR FACTURA</h3>
-<form method="post" asp-action="CreateRecibo">
-    <div class="row px-2 mx-2 border">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-          <input type="hidden" asp-for="PrestamoId" />
-         <input type="hidden" asp-for="ClienteId"/>
-        <div class="col-10 offset-1 mt-4">           
-
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="Descripcion"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="Descripcion" class="form-control" />
-                    <span asp-validation-for="Descripcion" class="text-danger"></span>
-                </div>
-            </div>
-
-             <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="Monto"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="Monto" class="form-control" />
-                    <span asp-validation-for="Monto" class="text-danger"></span>
-                </div>
-            </div>
-
-
-            <div class="form-group row">
-                <div class="col-8 offset-4">
-                    <partial name="_VistaCrearVolver"/>
-                </div>
-            </div>
-        </div>
+   </div><!-- /.container-fluid -->
     </div>
-</form>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
-*@

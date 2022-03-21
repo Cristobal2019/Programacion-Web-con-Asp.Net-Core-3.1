@@ -109,12 +109,12 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         // *************************************************************************************
         ////                         OBTENER EL CLIENTE
         //****************************************************************************************
-        public IActionResult ObtenerCliente(int Id)
+        public IActionResult ObtenerCliente(int ClienteId)
         {
 
             string Descripcion = "No hay cliente registrado";
 
-            Customer cliente = _context.Customer.Where(a => a.Id == Id).FirstOrDefault();
+            Customer cliente = _context.Customer.Where(a => a.Id == ClienteId).FirstOrDefault();
 
             if (cliente != null)
             {
