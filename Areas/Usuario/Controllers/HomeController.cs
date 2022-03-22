@@ -35,6 +35,34 @@ namespace CristobalCruz.Controllers
             return View( _context.Customer.ToList());
         }
 
+        [HttpGet]
+        public ActionResult BuscarCustomer(string Nombre)
+        {          
+              
+           if  (String.IsNullOrEmpty(Nombre))
+            {
+                _notify.Error("Favor escriba para buscar");
+                return RedirectToAction("Index", "Home");                
+            }             
+             else if (!String.IsNullOrEmpty(Nombre))
+            {
+              var busqueda = _context.Customer.Where(j => j.Nombre.Contains(Nombre)).FirstOrDefault();
+
+                if (busqueda != null)
+                {
+                  return View(busqueda);
+                }
+                else
+                {
+                _notify.Warning("No se encontro:<br/>" + Nombre);
+                return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
+
+        }
+
 
     }
 }

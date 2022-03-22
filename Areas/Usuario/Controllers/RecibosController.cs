@@ -77,5 +77,34 @@ namespace CristobalCruz.Areas.Usuario.Controllers
             }
         }
 
+        // *************************************************************************************
+        ////                            Detalle DE  recibos  X Cliente
+        //****************************************************************************************
+        public IActionResult ObtenerReciboxCustomer(int Id)
+        {
+
+            Recibo MisRecibos = _context.Recibo.Where(a => a.ClienteId == Id).FirstOrDefault();
+            if (MisRecibos != null)
+            {
+                return Json(new
+                {
+                    success = true,
+                    messageDescripcion = MisRecibos.Descripcion,
+                    messageMonto = MisRecibos.Monto,
+                    messagePrestamo = MisRecibos.PrestamoId
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    success = false,
+                    messageDescripcion = "No tiene Recibos",
+                    messageMonto = 0,
+                    messagePrestamo = 0
+                });
+            }
+        }
+
     }   }
 
