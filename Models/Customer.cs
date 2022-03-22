@@ -22,5 +22,9 @@ namespace CristobalCruz.Models
 
         [Required(ErrorMessage = "El correo es obligatorio")]
         public  string Email { get; set; }
+        
+        [Required]
+        [DataType(DataType.Date)]
+        public System.DateTime Fecha { get; set; }
     }
 }

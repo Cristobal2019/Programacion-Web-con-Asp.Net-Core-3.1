@@ -33,6 +33,7 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         {
             if (ModelState.IsValid)
             {
+                customer.Fecha=DateTime.Now;
                 _context.Customer.Add(customer);
                 await _context.SaveChangesAsync();
                 _notify.Success("Cliente Registrado <br/>" + customer.Nombre, 10);
