@@ -38,7 +38,6 @@ $(".verRecibos").click(function () {
     toastr.error(data.message);
 })
 //---------------------------------------------------------------------------------
-
 //----------------------------------------------------------------------------------------
 
 $(".verPrestamo").click(function () {
@@ -65,7 +64,7 @@ $(".verPrestamo").click(function () {
 //----------------------------------------------------------------------------------------
     $(document).ready(function () {
         //Llamar a datatable
-        $('#tblPrestamos').DataTable({
+        $('#tblPrestamos,#tblRecibos,#TablaUsuario').DataTable({
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
