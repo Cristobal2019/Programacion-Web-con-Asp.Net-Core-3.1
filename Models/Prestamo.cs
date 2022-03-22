@@ -24,5 +24,9 @@ namespace CristobalCruz.Models
         public int? Cuota { get; set; }
         public int ClienteId { get; set; }
 
+        [Required]
+        [DataType(DataType.Date)]
+        public System.DateTime Fecha { get; set; }
+
     }
 }

@@ -42,6 +42,7 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         {
             if (ModelState.IsValid)
             {
+                prestamo.Fecha = System.DateTime.Now;
                 _context.Prestamo.Add(prestamo);
                 _context.SaveChanges();
                 _notify.Success("Prestamo Nuevo <br/>#" + prestamo.Id);

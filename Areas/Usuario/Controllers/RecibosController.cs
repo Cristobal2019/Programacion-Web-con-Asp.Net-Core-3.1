@@ -42,6 +42,7 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         {
             if (ModelState.IsValid)
             {
+                recibo.Fecha = System.DateTime.Now;
                 _context.Recibo.Add(recibo);
                 _context.SaveChanges();
                 _notify.Success("Recibo Nuevo <br/>#" + recibo.Id);
