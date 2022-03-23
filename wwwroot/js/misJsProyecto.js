@@ -65,6 +65,7 @@ $(".verPrestamo").click(function () {
     $(document).ready(function () {
         //Llamar a datatable
         $('#tblPrestamos,#tblRecibos,#TablaUsuario').DataTable({
+            "lengthMenu":[[5,-1],[5,"ALL"]],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
