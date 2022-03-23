@@ -30,19 +30,27 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CrearCliente(Customer customer)
-        {
+        {         
+            
             if (ModelState.IsValid)
             {
-                customer.Fecha=DateTime.Now;
+                try
+                {
+                 customer.Fecha=DateTime.Now;
                 _context.Customer.Add(customer);
                 await _context.SaveChangesAsync();
                 _notify.Success("Cliente Registrado <br/>" + customer.Nombre, 10);
                 return RedirectToAction("Index","Home");
-
+                }
+                catch
+                {
+                    _notify.Error("Error al registar Cliente ");
+                    return RedirectToAction("Index", "Home");
+                }              
 
             }
-            _notify.Error("Error en Crear cliente");
-            return RedirectToAction("Index", "Home");
+            _notify.Warning("Modelo no valido");
+            return View();
 
         }
 

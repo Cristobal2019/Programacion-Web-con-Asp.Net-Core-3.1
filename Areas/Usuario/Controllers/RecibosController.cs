@@ -42,14 +42,22 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         {
             if (ModelState.IsValid)
             {
-                recibo.Fecha = System.DateTime.Now;
+                try {
+               recibo.Fecha = System.DateTime.Now;
                 _context.Recibo.Add(recibo);
                 _context.SaveChanges();
                 _notify.Success("Recibo Nuevo <br/>#" + recibo.Id);
                 return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    _notify.Error("Error al rgistrar Recibo");
+                    return RedirectToAction("Index", "Home");
+                }
+              
             }
-            _notify.Error("Error en Crear Recibo");
-            return View(recibo);
+            _notify.Warning("Modelo no valido");
+            return View();
         }               
 
      

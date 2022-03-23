@@ -42,14 +42,23 @@ namespace CristobalCruz.Areas.Usuario.Controllers
         {
             if (ModelState.IsValid)
             {
+                try
+                {
                 prestamo.Fecha = System.DateTime.Now;
                 _context.Prestamo.Add(prestamo);
                 _context.SaveChanges();
                 _notify.Success("Prestamo Nuevo <br/>#" + prestamo.Id);
                 return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    _notify.Error("Error al registrar prestamo");
+                    return RedirectToAction("Index", "Home");
+                }
+
             }
-            _notify.Error("Error en Crear Prestamo");
-            return View(prestamo);
+            _notify.Warning("Modelo no valido");
+            return View();
         }
 
         //------------------------------------------------
