@@ -56,7 +56,7 @@ namespace CristobalCruz.Areas.Usuario.Controllers
                 }
               
             }
-            _notify.Warning("Modelo no valido");
+            _notify.Warning("Favor revisar los datos");
             return View();
         }               
 
