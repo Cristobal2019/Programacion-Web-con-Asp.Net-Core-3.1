@@ -11,13 +11,13 @@ namespace CristobalCruz.Models
         [Display(Name = "Descripciòn del Prestamo ")]
         public string Descripcion { get; set; }
 
-        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
+        //[RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
         [Required(ErrorMessage = "Monto es obligatorio")]
-        public int? Monto { get; set; }
+        public float? Monto { get; set; }
 
-        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
-        [Required(ErrorMessage = "Interès es obligatorio")]
-        public int? Interes { get; set; }
+        //[RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
+        [Required(ErrorMessage = "Interès es obligatorio")]   
+        public float? Interes { get; set; }
 
         [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
         [Required(ErrorMessage = "Cuota es obligatorio")]

@@ -12,7 +12,7 @@ namespace CristobalCruz.Models
 
         [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
         [Required(ErrorMessage = "Monto es obligatorio")]
-        public int? Monto { get; set; }
+        public float? Monto { get; set; }
         public int PrestamoId { get; set; }
         public int ClienteId { get; set; }
 

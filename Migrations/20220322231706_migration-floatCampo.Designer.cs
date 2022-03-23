@@ -4,14 +4,16 @@ using CristobalCruz.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CristobalCruz.Migrations
 {
     [DbContext(typeof(MyConexionBD))]
-    partial class MyConexionBDModelSnapshot : ModelSnapshot
+    [Migration("20220322231706_migration-floatCampo")]
+    partial class migrationfloatCampo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,9 +78,9 @@ namespace CristobalCruz.Migrations
                         .IsRequired()
                         .HasColumnType("real");
 
-                    b.Property<float?>("Monto")
+                    b.Property<double?>("Monto")
                         .IsRequired()
-                        .HasColumnType("real");
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
